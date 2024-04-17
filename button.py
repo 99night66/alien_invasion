@@ -13,7 +13,7 @@ class Button:
         self.font = pygame.font.SysFont(None, 48)
 
         # 创建按钮的rect对象，并使其居中。
-        self.rect = pygame.rect(0, 0, self.width, self.height)
+        self.rect = pygame.Rect(0, 0, self.width, self.height)
         self.rect.center = self.screen_rect.center
 
         # 按钮的标签只需创建一次。
