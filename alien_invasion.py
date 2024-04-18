@@ -157,8 +157,9 @@ class AlienInvasion:
         
         if collisions:
             for aliens in collisions.values():
-                self.stats.score += self.settings.alien_points
+                self.stats.score += self.settings.alien_points * len(aliens)  # 当子弹设置的足够大时，一个子弹可能打到多个敌人
             self.sb.prep_score()
+            self.sb.check_high_score()
         
         if not self.aliens:
             # 删除现有的所有⼦弹，并创建⼀群新的外星⼈
