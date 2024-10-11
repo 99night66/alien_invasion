@@ -27,6 +27,7 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
 
         # 创建⼀个⽤于存储游戏统计信息的实例。
+        # 并创建记分牌。
         self.stats = GameStats(self)
         self.sb = Scoreboard(self)
 
@@ -101,6 +102,8 @@ class AlienInvasion:
             self.stats.reset_stats()
             self.stats.game_active = True
             self.sb.prep_score()
+            self.sb.prep_level()
+            self.sb.prep_ships()
 
             # 清空余下的外星⼈和⼦弹。
             self.aliens.empty()
@@ -167,6 +170,10 @@ class AlienInvasion:
             self._create_fleet()
             self.settings.increase_speed()
 
+            # 提高等级
+            self.stats.level += 1
+            self.sb.prep_level()
+
     def _update_aliens(self):
         """
         检查是否有外星⼈位于屏幕边缘，
@@ -201,6 +208,7 @@ class AlienInvasion:
         if self.stats.ships_left > 0:
             # 将ship_left减1
             self.stats.ships_left -= 1
+            self.sb.prep_ships()
 
             # 清空余下的外星人和子弹
             self.aliens.empty()
